@@ -1,0 +1,18 @@
+[user]
+	email = jzi@inbox.ru
+	name = p.g.golovkin
+[core]
+	excludesfile = /home/pgg/.gitignore
+   whitespace = trailing-space, space-before-tab, cr-at-eol
+[color]
+   diff=auto
+   sratus=auto
+   branch=auto
+[alias]
+   st = status
+   ci = commit
+   br = branch
+   co = checkout
+   di = diff
+   plog = log --pretty=format:'%h %Cblue%cn %Creset%cr %Cgreen%s'
+   glog = log --oneline --all --graph --pretty=format:'%h %Cblue%cn %Creset%cr %Cgreen%s' 
