@@ -1,60 +1,22 @@
 set nocompatible
 filetype off
 
+"Allows writing to files with root priviledges
+cmap w!! w !sudo tee % > /dev/null
+
+"colorscheme base16-default-dark
+let base16colorspace=256  " Access colors present in 256 colorspace
+
 set ignorecase
 set smartcase
 set encoding=utf-8
 set cursorline
-"let g:ycm_use_clangd = 1
-
-"Plug :Automatic installation
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-"Automatic installation vim-plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'majutsushi/tagbar'
-Plug 'vim-scripts/c.vim'
-"Plug 'ericcurtin/CurtineIncSw.vim'
-"Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'easymotion/vim-easymotion'
-"Plug 'vim-syntastic/syntastic'
-Plug 'ap/vim-buftabline'
-"Plug 'chemzqm/vim-iterm2-start'
-Plug 'kien/ctrlp.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mattn/emmet-vim'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-Plug 'tpope/vim-surround'
-
-"Colorschemes
-"Plug 'chriskempson/base16-vim'
-Plug 'gorodinskiy/vim-coloresque'
-call plug#end()
-
-"To enable the tools for cmake or doxygen by c.vim plugin
-let g:C_UseTool_cmake='yes'
-let g:C_UseTool_doxygen='yes' 
-
-"Set a keyboard for ericcurtin/CurtineIncSw.vim plugin
-"map <F5> :call CurtineIncSw()<CR>
 
 set number
 set relativenumber
+
+":set list
+set listchars=eol:$,precedes:«,extends:»,space:·,tab:→-,trail:-,nbsp:%
 
 "Tabs
 set smarttab
@@ -63,9 +25,11 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
+set updatetime=100
+
 "Search case and highlit
-set hlsearch
 set incsearch
+"set hlsearch
 
 set mouse=a
 if &term =~ '^screen'
@@ -79,9 +43,52 @@ set backspace=indent,eol,start
 set splitright
 set splitbelow
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Plug 'Valloric/YouCompleteMe'
+
+"Tagbar a cc class outline viewer for Vim
+"Plug 'majutsushi/tagbar'
+
+Plug 'vim-scripts/c.vim'
+"Plug 'ericcurtin/CurtineIncSw.vim'
+"Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'easymotion/vim-easymotion'
+"Plug 'vim-syntastic/syntastic'
+Plug 'ap/vim-buftabline'
+"Plug 'chemzqm/vim-iterm2-start'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-surround'
+
+"Colorschemes
+"Plug 'chriskempson/base16-vim'
+Plug 'gorodinskiy/vim-coloresque'
+
+"Select words with Ctrl-N (like Ctrl-d in Sublime Text
+"vim -Nu ~/.vim/plugged/vim-visual-multi/tutorialrc
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+Plug 'chrisbra/csv.vim'
+Plug 'junegunn/fzf'
+Plug 'airblade/vim-gitgutter'
+Plug 'tmux-plugins/vim-tmux'
+
+call plug#end()
+ 
+"To enable the tools for cmake or doxygen by c.vim plugin
+let g:C_UseTool_cmake='yes'
+let g:C_UseTool_doxygen='yes' 
+  
+"Set a keyboard for ericcurtin/CurtineIncSw.vim plugin
+"map <F5> :all CurtineIncSw()<CR>
+
+
 "NERDTree
 map <silent> <leader><leader> :NERDTreeToggle<CR> " leader is `\`
-"majutsushi/tagbar
 "nmap <F8> :TagbarToggle<CR>
 
 "CtrlP
@@ -133,9 +140,3 @@ map <Leader>k <Plug>(easymotion-k)
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-"colorscheme base16-default-dark
-let base16colorspace=256  " Access colors present in 256 colorspace
-
-":set list
-set listchars=eol:$,precedes:«,extends:»,space:·,tab:→-,trail:-,nbsp:%
- 
